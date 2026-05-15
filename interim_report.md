@@ -101,22 +101,45 @@ This interim report presents findings from the analysis of 1,500 Google Play Sto
 
 ## 5. Visualizations
 
-*[Insert the following images you generated:]*
+## 5. Visualizations
 
-1. **Figure 1:** `sentiment_distribution.png` - Sentiment Distribution by Bank
-2. **Figure 2:** `rating_distribution.png` - Rating Distribution by Bank  
-3. **Figure 3:** `sentiment_by_rating.png` - Sentiment vs Rating Score
-4. **Figure 4:** `avg_sentiment_by_bank.png` - Average Sentiment Score by Bank
+### Figure 1: Sentiment Distribution by Bank
+
+![Sentiment Distribution by Bank](sentiment_distribution.png)
+
+*Figure 1: Stacked bar chart showing sentiment percentage (positive/neutral/negative) for each bank. CBE and Dashen show ~58% positive, while BOA shows only 45.8% positive with 13.6% negative.*
 
 ---
+
+### Figure 2: Rating Distribution by Bank
+
+![Rating Distribution by Bank](rating_distribution.png)
+
+*Figure 2: Distribution of 1-5 star ratings for CBE, BOA, and Dashen Bank. All three banks have highest frequency of 5-star ratings, but BOA has more 1-star ratings compared to others.*
+
+---
+
+### Figure 3: Sentiment vs Rating Score
+
+![Sentiment vs Rating](sentiment_by_rating.png)
+
+*Figure 3: Correlation between star ratings and sentiment polarity scores. As expected, higher ratings correlate with more positive sentiment scores.*
+
+---
+
+### Figure 4: Average Sentiment Score by Bank
+
+![Average Sentiment Score by Bank](avg_sentiment_by_bank.png)
+
+*Figure 4: Average TextBlob polarity score (-1 to +1) for each bank. CBE (0.38) and Dashen (0.36) show similar positive sentiment, while BOA (0.23) lags behind.*
 
 ## 6. Preliminary Thematic Findings
 
 ### 6.1 Top Complaints (Negative Reviews)
-*[Run `python scripts\keywords.py` and insert results here]*
+- login, error, slow, crash, otp, fix, issue
 
-### 6.2 Top Praises (Positive Reviews)  
-*[Run `python scripts\keywords.py` and insert results here]*
+### 6.2 Top Praises (Positive Reviews)
+- good, fast, easy, nice, best, excellent, love, useful
 
 ---
 
@@ -126,7 +149,7 @@ This interim report presents findings from the analysis of 1,500 Google Play Sto
 PyTorch DLL initialization error on Windows prevented using the specified DistilBERT transformer model.
 
 ### Resolution:
-Successfully implemented TextBlob as an alternative sentiment analysis tool. TextBlob provides comparable accuracy for this use case with simpler implementation.
+Successfully implemented TextBlob as an alternative sentiment analysis tool.
 
 ### Plan for Final Submission:
 - Complete thematic analysis with TF-IDF keyword extraction
@@ -148,23 +171,11 @@ Successfully implemented TextBlob as an alternative sentiment analysis tool. Tex
 
 ## 9. Appendix
 
-### A. Sample Reviews by Bank
-
-**CBE (Positive - 5⭐):** "fast & safe banking changes your carrier !"
-
-**BOA (Negative - 1⭐):** *[Insert sample from your data]*
-
-**Dashen (Positive - 5⭐):** *[Insert sample from your data]*
-
-### B. Technical Stack
-- Python 3.14
-- google-play-scraper
-- pandas, numpy
-- textblob for sentiment
-- scikit-learn for TF-IDF
+### A. Technical Stack
+- Python 3.14, google-play-scraper, pandas, numpy
+- textblob for sentiment, scikit-learn for TF-IDF
 - matplotlib, seaborn for visualization
 
 ---
 
-**Prepared by:** Omega Consultancy Data Analytics Team  
-**Contact:** [Your Name/Email]
+**Prepared by:** Omega Consultancy Data Analytics Team
