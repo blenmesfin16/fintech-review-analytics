@@ -1,0 +1,32 @@
+Set-Content -Path .gitignore -Value '# Data files (NEVER commit these)
+data/
+*.csv
+*.db
+*.sqlite
+
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+.virtualenv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Logs
+*.log'
