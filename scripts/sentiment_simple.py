@@ -1,17 +1,21 @@
+﻿"""
+Sentiment Analysis for Bank Reviews using TextBlob
+"""
+
 import pandas as pd
 from textblob import TextBlob
 import time
 
 print("="*50)
-print("SENTIMENT ANALYSIS (TextBlob)")
+print("SENTIMENT ANALYSIS")
 print("="*50)
 
 # Load cleaned data
 df = pd.read_csv("data/cleaned_reviews.csv")
-print(f"\n?? Loaded {len(df)} cleaned reviews")
+print(f"\n📥 Loaded {len(df)} cleaned reviews")
 
-# Analyze sentiments using TextBlob
-print("\n?? Analyzing sentiments...")
+# Analyze sentiments
+print("\n🔄 Analyzing sentiments...")
 
 sentiments = []
 scores = []
@@ -27,9 +31,8 @@ for i, review in enumerate(df["review_text"].fillna("").tolist()):
     
     try:
         blob = TextBlob(review)
-        polarity = blob.sentiment.polarity  # -1 to +1
+        polarity = blob.sentiment.polarity
         
-        # Map polarity to sentiment
         if polarity > 0.2:
             sentiment = "positive"
         elif polarity < -0.2:
@@ -46,36 +49,17 @@ for i, review in enumerate(df["review_text"].fillna("").tolist()):
 df["sentiment_label"] = sentiments
 df["sentiment_score"] = scores
 
-print(f"\n? Sentiment analysis complete")
-
 # Save results
 df.to_csv("data/reviews_with_sentiment.csv", index=False)
-print(f"?? Saved to: data/reviews_with_sentiment.csv")
+print(f"\n✅ Saved to: data/reviews_with_sentiment.csv")
 
-# Summary by bank
-print(f"\n{'='*50}")
-print("SENTIMENT SUMMARY BY BANK")
-print(f"{'='*50}")
-
+# Summary
+print("\n" + "="*50)
+print("SENTIMENT SUMMARY")
+print("="*50)
 for bank in df["bank"].unique():
     bank_df = df[df["bank"] == bank]
-    print(f"\n?? {bank}:")
-    print(f"   Total reviews: {len(bank_df)}")
-    print(f"   Avg rating: {bank_df['rating'].mean():.2f}?")
-    print(f"   Avg sentiment score: {bank_df['sentiment_score'].mean():.2f}")
-    print(f"   Sentiment distribution:")
-    sent_counts = bank_df["sentiment_label"].value_counts()
-    for sent, count in sent_counts.items():
-        pct = (count/len(bank_df))*100
-        print(f"      {sent}: {count} ({pct:.1f}%)")
-
-# Overall summary
-print(f"\n{'='*50}")
-print("OVERALL SENTIMENT SUMMARY")
-print(f"{'='*50}")
-print(df["sentiment_label"].value_counts())
-
-# Save summary to CSV
-summary = df.groupby(["bank", "sentiment_label"]).size().unstack().fillna(0)
-summary.to_csv("data/sentiment_summary.csv")
-print(f"\n?? Sentiment summary saved to: data/sentiment_summary.csv")
+    print(f"\n🏦 {bank}:")
+    print(f"   Positive: {len(bank_df[bank_df['sentiment_label'] == 'positive'])} ({len(bank_df[bank_df['sentiment_label'] == 'positive'])/len(bank_df)*100:.1f}%)")
+    print(f"   Neutral: {len(bank_df[bank_df['sentiment_label'] == 'neutral'])} ({len(bank_df[bank_df['sentiment_label'] == 'neutral'])/len(bank_df)*100:.1f}%)")
+    print(f"   Negative: {len(bank_df[bank_df['sentiment_label'] == 'negative'])} ({len(bank_df[bank_df['sentiment_label'] == 'negative'])/len(bank_df)*100:.1f}%)")
