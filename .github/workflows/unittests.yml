@@ -1,8 +1,8 @@
-name: Unit Tests
+﻿name: Unit Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, task-* ]
   pull_request:
     branches: [ main ]
 
@@ -16,12 +16,25 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: "3.10"
+        python-version: '3.10'
     
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install pandas numpy textblob scikit-learn matplotlib seaborn pytest
+        pip install psycopg2-binary
+        python -m textblob.download_corpora
     
-    - name: Run tests
+    - name: Create data directory for tests
       run: |
-        pytest tests/ -v
+        mkdir -p data
+    
+    - name: Create sample data for testing (if needed)
+      run: |
+        # Create a minimal test CSV if real data doesn't exist
+        echo "review_id,review_text,rating,review_date,bank,source" > data/test_data.csv
+        echo "test1,good app,5,2024-01-01,Test Bank,Google Play" >> data/test_data.csv
+    
+    - name: Run unit tests
+      run: |
+        python -m pytest tests/ -v --tb=short
