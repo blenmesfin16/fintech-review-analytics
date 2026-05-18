@@ -37,3 +37,35 @@
 - [ ] Task 2: Sentiment & Thematic Analysis
 - [ ] Task 3: PostgreSQL Database
 - [ ] Task 4: Insights & Recommendations
+
+## Database Schema (Task 3)
+
+### Setup Instructions
+1. Install PostgreSQL
+2. Create database: `CREATE DATABASE bank_reviews;`
+3. Run: `python scripts/setup_database.py`
+
+### Tables Structure
+
+**banks**
+| Column | Type | Description |
+|--------|------|-------------|
+| bank_id | SERIAL | Primary key |
+| bank_name | VARCHAR(100) | Bank name |
+| app_name | VARCHAR(100) | App name |
+
+**reviews**
+| Column | Type | Description |
+|--------|------|-------------|
+| review_id | VARCHAR(200) | Primary key |
+| bank_id | INTEGER | Foreign key |
+| review_text | TEXT | Review content |
+| rating | INTEGER | 1-5 stars |
+| review_date | DATE | Review date |
+| sentiment_label | VARCHAR(20) | positive/neutral/negative |
+| sentiment_score | FLOAT | Polarity score |
+| identified_theme | VARCHAR(50) | Business theme |
+| source | VARCHAR(50) | Source platform |
+
+### Data Inserted
+- Total reviews: 1,500 (500 per bank)
